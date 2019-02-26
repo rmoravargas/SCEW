@@ -1,3 +1,20 @@
-<p>
-  search works!
-</p>
+<div class="input-group mb-3 mt-3">
+    <input type="text" [(ngModel)]="term" class="form-control" placeholder="Nombre del curso o profesor" aria-label="Nombre o profesor" aria-describedby="button-addon2">
+    <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="button" (click)="searchCourses(term)" id="button-addon2">Buscar</button>
+    </div>
+</div>
+
+<div class="card-columns" *ngIf="showedList || showedList.length > 0">
+    <div class="card text-center" *ngFor="let course of showedList">
+        <div class="card-body">
+            <h5 class="card-title">{{course.nombre}}</h5>
+            <p class="card-text">{{course.profesor}}</p>
+            <p class="card-text"><small class="text-muted">{{course.semestre}} - {{course.anyo}}</small></p>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-warning" role="alert" *ngIf="showedList || showedList.length > 0">
+    No se ha encontrado información para el termino: <span class="font-weight-bold">{{term}}</span>
+</div>
